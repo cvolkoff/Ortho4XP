@@ -438,7 +438,7 @@ def extract_elevation_and_bathymetry_data(lat, lon):
                         # we use a safe margin = DEM_elev - 2 to cope with it
                         bathy = numpy.frombuffer(bDATA, dtype=numpy.int16)
                         safe  = numpy.frombuffer(bELEV, dtype=numpy.int16) - 2 
-                        bathy = numpy.minimum(bathy, safe)
+                        bathy = numpy.minimum(bathy.shape, safe.shape)
                         bDATA = bytes(bathy)
                 bDEMS += bH + bL + bDATA
                 consumed += sub_atom_len
